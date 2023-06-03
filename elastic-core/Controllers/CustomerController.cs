@@ -20,5 +20,12 @@ namespace elastic_core.Controllers
             var res = await _customerService.GetAllCustomers();
             return Ok(res);
         }
+
+        [HttpGet("GetCustomerById")]
+        public async Task<IActionResult> GetCustomerById(string id)
+        {
+            var res = await _customerService.GetCustomerById(id);
+            return Ok(res);
+        }
     }
 }
