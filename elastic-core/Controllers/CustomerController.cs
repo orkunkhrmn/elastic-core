@@ -1,5 +1,5 @@
-﻿using elastic_core.Services.Abstract;
-using Microsoft.AspNetCore.Http;
+﻿using elastic_core.Dtos;
+using elastic_core.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace elastic_core.Controllers
@@ -9,6 +9,7 @@ namespace elastic_core.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+
         public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
@@ -25,6 +26,13 @@ namespace elastic_core.Controllers
         public async Task<IActionResult> GetCustomerById(string id)
         {
             var res = await _customerService.GetCustomerById(id);
+            return Ok(res);
+        }
+
+        [HttpPost("AddCustomer")]
+        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customer)
+        {
+            var res = await _customerService.AddCustomer(customer);
             return Ok(res);
         }
     }
