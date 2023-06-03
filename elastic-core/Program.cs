@@ -1,4 +1,6 @@
 using elastic_core.Extensions;
+using elastic_core.Services.Abstract;
+using elastic_core.Services.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddElasticsearch(builder.Configuration);
+builder.Services.AddTransient<ICustomerService, CustomerService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
