@@ -12,6 +12,6 @@ namespace elastic_core.Services.Abstract
 
         bool Delete(string id);
 
-        bool Update(Guid id, CustomerDto customer);
+        public Task<dynamic> Update(Guid id, CustomerDto customer);
     }
 }

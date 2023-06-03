@@ -57,17 +57,15 @@ namespace elastic_core.Services.Concrete
             return searchResponse.IsValid ? searchResponse.Documents.ToList().FirstOrDefault() : default;
         }
 
-        public bool Update(Guid id, CustomerDto customer)
+        public async Task<dynamic> Update(Guid id, CustomerDto customer)
         {
-            var updatedCustomer = new Customer { Id = id };
-
+            var objupdatedCustomer = new Customer { Id = id, };
             var response = _client.Update(DocumentPath<Customer>
-                    .Id(id),
-                    u => u
-                        .Index("customer")
-                        .DocAsUpsert(true)
-                        .Doc(updatedCustomer));
-
+                .Id(id),
+                u => u
+                    .Index("customer")
+                    .DocAsUpsert(true)
+                    .Doc(objupdatedCustomer));
             return response.IsValid;
         }
     }
